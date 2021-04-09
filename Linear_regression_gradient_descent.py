@@ -1,7 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
-%matplotlib inline
 
 def test_train_split(a,s,dat):   #split a is split % , s is length of dataset , dat is dataset
     import random 

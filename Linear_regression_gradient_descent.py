@@ -9,6 +9,7 @@ def test_train_split(a,s,dat):   #split a is split % , s is length of dataset , 
     trn=list()
     tst=list()
     testi=[]
+    testx,trainx,trainy,testy=[],[],[],[]
     for i in range(a):
         random.randrange(s)
         tst.append(dat.iloc[i])
@@ -16,12 +17,12 @@ def test_train_split(a,s,dat):   #split a is split % , s is length of dataset , 
     for i in range(s):
         if i not in testi:
             trn.append(dat.iloc[i])
-    testx=test[['FUELCONSUMPTION_COMB','ENGINESIZE']]
-    testx['One']=[1 for i in range(len(test))]
-    testy=test[['CO2EMISSIONS']]
-    trainx=train[['FUELCONSUMPTION_COMB','ENGINESIZE']]
-    trainx['One']=[1 for i in range(len(train))]
-    trainy=train[['CO2EMISSIONS']]
+    testx=tst[['FUELCONSUMPTION_COMB','ENGINESIZE']]
+    testx['One']=[1 for i in range(len(tst))]
+    testy=tst[['CO2EMISSIONS']]
+    trainx=trn[['FUELCONSUMPTION_COMB','ENGINESIZE']]
+    trainx['One']=[1 for i in range(len(trn))]
+    trainy=trn[['CO2EMISSIONS']]
     cols=testx.columns.tolist()
     cols=cols[-1:]+cols[:-1]
     trainx=trainx[cols]
@@ -39,7 +40,6 @@ def GradDesc(x,y,tsx,tsy,alpha=0.00000001):
     #lcst=8000
     result=[]
     t=[[0],[0],[0]]
-    tla,tlb,tlc=[],[],[]
     a=list()
     for i in range(15):
         E=np.subtract(np.dot(x,t),y)
@@ -66,7 +66,7 @@ def GradDesc(x,y,tsx,tsy,alpha=0.00000001):
 
 def predict(thet,testx,testy):  
     testx=np.array(testx)
-    res=test.dot(thet)
+    res=testx.dot(thet)
     return mse(testy,res)
 
 def mse(a,b):

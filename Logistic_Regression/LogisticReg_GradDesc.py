@@ -8,7 +8,7 @@ def mean_normalise(df):
     """
     This function is used to normalise the
     Dataset using each attributes mean """
-    for x in keys[:-1]:
+    for x in df.keys[:-1]:
         df[x] = [i / df[x].mean() for i in df[x]]
     return df
 
